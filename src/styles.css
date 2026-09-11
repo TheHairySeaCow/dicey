@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+@theme {
+  --color-felt: #efe8d4;
+  --color-felt-ink: #2a261f;
+  --color-felt-muted: #6a6458;
+  --color-dollar-bill: #6b8068;
+  --color-dollar-bill-deep: #556853;
+  --color-dusty: #a8b4a4;
+  --color-velvet: #7a1b2b;
+  --color-velvet-deep: #5c121e;
+  --color-walnut: #3c2f27;
+  --color-walnut-lip: #2a211c;
+  --color-walnut-light: #53453c;
+  --color-ink: #1c1917;
+  --color-flap: #3a3a3c;
+  --color-flap-edge: #2a2a2c;
+  --color-flap-face: #4a4a4c;
+  --color-flap-num: #e8e4dc;
+  --color-puck: #f4f1ea;
+  --color-puck-ink: #2a261f;
+  --color-rail-stitch: #c9b896;
+  --color-ticket: #f7f1e3;
+
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --font-table: "Oswald", "Arial Narrow", sans-serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-rail: 28px;
+
+  --shadow-border:
+    0px 0px 0px 1px rgb(28 25 23 / 0.08),
+    0px 1px 2px -1px rgb(28 25 23 / 0.08),
+    0px 2px 8px 0px rgb(28 25 23 / 0.06);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-emphasis: 500ms;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background: var(--color-felt);
+    color: var(--color-ink);
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .felt-cloth {
+    background-color: var(--color-felt);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgb(80 60 30 / 0.045) 0.6px, transparent 0.8px),
+      radial-gradient(circle at 2px 3px, rgb(40 50 30 / 0.03) 0.5px, transparent 0.7px);
+    background-size: 3px 3px, 5px 5px;
+  }
+
+  .wood-rail {
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.06), transparent 28%),
+      linear-gradient(90deg, #2a211c 0%, #4a3b32 18%, #3c2f27 50%, #4a3b32 82%, #2a211c 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.12),
+      inset 0 -2px 4px rgb(0 0 0 / 0.28);
+  }
+
+  .table-line {
+    border-color: var(--color-felt-ink);
+  }
+
+  .spot-paint {
+    transition:
+      background-color 350ms var(--ease-out),
+      opacity 350ms var(--ease-out),
+      box-shadow 250ms var(--ease-out);
+  }
+
+  .spot-flash-base {
+    background-color: var(--color-dollar-bill) !important;
+    opacity: 1 !important;
+    mix-blend-mode: multiply;
+    transition: none;
+  }
+
+  .flap-digit {
+    position: relative;
+    width: 1.15em;
+    height: 1.7em;
+    perspective: 400px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .flap-half {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50%;
+    overflow: hidden;
+    background: var(--color-flap-face);
+    color: var(--color-flap-num);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .flap-half span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200%;
+    line-height: 1;
+  }
+
+  .flap-top {
+    top: 0;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid var(--color-flap-edge);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+  }
+
+  .flap-top span {
+    top: 0;
+  }
+
+  .flap-bottom {
+    bottom: 0;
+    border-radius: 0 0 4px 4px;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 0.35);
+  }
+
+  .flap-bottom span {
+    bottom: 0;
+  }
+
+  .flap-hinge {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--color-flap-edge);
+    z-index: 3;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+
+  .puck {
+    width: 1.55rem;
+    height: 1.55rem;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 35% 32%, #fff 0 28%, var(--color-puck) 42%, #d9d3c6 100%);
+    color: var(--color-puck-ink);
+    box-shadow:
+      0 1px 1px rgb(0 0 0 / 0.25),
+      0 4px 8px rgb(0 0 0 / 0.18);
+    font-family: var(--font-table);
+    font-weight: 600;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    display: grid;
+    place-items: center;
+  }
+
+  .ticket-card {
+    background: var(--color-ticket);
+    box-shadow: var(--shadow-border);
+  }
+}
+
+@keyframes dicey-wobble {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+  35% {
+    transform: rotate(5deg);
+  }
+  62% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes dicey-shake {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  18% {
+    transform: rotate(-18deg) scale(1.06);
+  }
+  36% {
+    transform: rotate(16deg) scale(1.04);
+  }
+  54% {
+    transform: rotate(-12deg) scale(1.08);
+  }
+  72% {
+    transform: rotate(10deg) scale(1.03);
+  }
+}
+
+.dicey-wobble {
+  animation: dicey-wobble 2.6s ease-in-out infinite;
+}
+
+.dicey-shake {
+  animation: dicey-shake 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot-paint {
+    transition: none;
+  }
+
+  .dicey-wobble,
+  .dicey-shake {
+    animation: none;
+  }
+}
