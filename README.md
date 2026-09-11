@@ -77,3 +77,5 @@ Bank, mode, and line persist in `localStorage`. Nothing is uploaded. There is no
 ## Stack
 
 TanStack Start, React 19, Tailwind v4, Zustand. Math lives in `src/lib/craps/`. The table is `src/components/craps/`.
+
+Built by [Grok](https://grok.com), xAI.
